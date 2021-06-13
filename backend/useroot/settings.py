@@ -4,7 +4,6 @@ from pathlib import Path
 
 
 
-
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
@@ -26,8 +25,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'crispy_forms',
-    'useroot.core'
+    'useroot.core',
+    'drf_yasg'
 ]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
+
+
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -90,14 +99,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    )
-}
-
-
-
 ACCOUNT_ACTIVATION_DAYS = 1
 
 DEFAULT_FROM_EMAIL = 'noreply@yourdomain.com'
@@ -113,9 +114,13 @@ USE_L10N = False
 USE_TZ = False
 
 EMAIL_HOST ='smtp.server' 
+
 EMAIL_PORT = 25 
+
 EMAIL_HOST_USER = 'username'
+
 EMAIL_HOST_PASSWORD = 'secret'
+
 EMAIL_USE_TLS = True
 
 
@@ -131,5 +136,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'front/build/static')]
 
-DATETIME_FORMAT = '%H:%M' 
 
+
+LOGIN_REDIRECT_URL =  '/'
