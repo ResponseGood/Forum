@@ -1,4 +1,4 @@
-from useroot.core import views
+from useroot.core import views, models
 from useroot.views import index 
 from useroot.api import urls
 from django.contrib import admin
@@ -12,12 +12,10 @@ from django.conf.urls import url
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Snippets API",
+        title="Useroot API",
         default_version='v1',
-        description="Test description",
-        terms_of_service="https://www.google.com/policies/terms/",
-        contact=openapi.Contact(email="contact@snippets.local"),
-        license=openapi.License(name="BSD License"),
+        description="Useroot API offical",
+        contact=openapi.Contact(email="nixwares@gmail.com"),
     ),
     public=True,
     permission_classes=[permissions.AllowAny],

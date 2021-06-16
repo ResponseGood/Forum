@@ -29,14 +29,11 @@ INSTALLED_APPS = [
     'drf_yasg'
 ]
 
-
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     )
 }
-
-
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -103,7 +100,7 @@ ACCOUNT_ACTIVATION_DAYS = 1
 
 DEFAULT_FROM_EMAIL = 'noreply@yourdomain.com'
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-rus'
 
 TIME_ZONE = 'UTC'
 
@@ -112,6 +109,8 @@ USE_I18N = True
 USE_L10N = False
 
 USE_TZ = False
+
+DATE_FORMAT = '%H:%M'
 
 EMAIL_HOST ='smtp.server' 
 
@@ -122,7 +121,6 @@ EMAIL_HOST_USER = 'username'
 EMAIL_HOST_PASSWORD = 'secret'
 
 EMAIL_USE_TLS = True
-
 
 STATIC_URL = '/static/'
 
@@ -135,7 +133,6 @@ STATICFILES_DIRS = [os.path.join(ROOT_PATH, 'static')]
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'front/build/static')]
-
 
 
 LOGIN_REDIRECT_URL =  '/'
