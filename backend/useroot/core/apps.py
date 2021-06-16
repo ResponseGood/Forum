@@ -3,5 +3,5 @@ from django.contrib import admin
 
 class CoreConfig(AppConfig):
     name = 'useroot.core'
-    verbose_name='Посты'
+    verbose_name='Посты и комментарии'
 

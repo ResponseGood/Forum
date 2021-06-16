@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.db import models
+from django.db.models.aggregates import Max
 from django_extensions.db.fields import AutoSlugField
 from autoslug import AutoSlugField
 from django.contrib.auth.models import User
@@ -14,15 +15,24 @@ from django.contrib.auth.models import User
 #   username
 #   inviter
 
+class Category(models.Model):
+    name_category = models.CharField(verbose_name='Название категории', max_length=30)
+    description = models.CharField(verbose_name='Описание категории', max_length=70)
+    
+    class Meta:
+        verbose_name = "Категории"
+        verbose_name_plural = "Категории"
 
+    def __str__(self): 
+        return '{}'.format(self.name_category)
 
-
-
+    
 
 class Post(models.Model):
     user = User.objects.get(id=1)
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=user)
     title = models.CharField(verbose_name='Заголовок', max_length=100)
+    category = models.ForeignKey(Category, verbose_name='Категория', on_delete=models.CASCADE, blank=True)
     now = datetime.now().replace(second=0,microsecond=0).strftime('%H:%M')
     time = models.TimeField(verbose_name='Дата публикации', default=now)
     content = models.TextField(verbose_name='Текст поста', max_length=10000, blank=True) 
@@ -39,9 +49,6 @@ class Post(models.Model):
 
     def __str__(self): 
         return 'Пост {} {}'.format(self.title, self.time)
-
-    
-
 
 
 class Comment(models.Model):
