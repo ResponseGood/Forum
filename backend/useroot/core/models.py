@@ -3,8 +3,7 @@ from django.db import models
 from django.db.models.aggregates import Max
 from django_extensions.db.fields import AutoSlugField
 from autoslug import AutoSlugField
-from django.contrib.auth.models import User
-
+from django.contrib.auth import get_user_model
 #class User(models.Model):
 #   status             
 #   count_posts
@@ -14,6 +13,9 @@ from django.contrib.auth.models import User
 #   email
 #   username
 #   inviter
+
+
+
 
 class Category(models.Model):
     name_category = models.CharField(verbose_name='Название категории', max_length=30)
@@ -27,12 +29,10 @@ class Category(models.Model):
         return '{}'.format(self.name_category)
 
     
-
 class Post(models.Model):
-    user = User.objects.get(id=1)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, default=user)
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     title = models.CharField(verbose_name='Заголовок', max_length=100)
-    category = models.ForeignKey(Category, verbose_name='Категория', on_delete=models.CASCADE, blank=True)
+    category = models.ForeignKey(Category, verbose_name='Категория', on_delete=models.CASCADE)
     now = datetime.now().replace(second=0,microsecond=0).strftime('%H:%M')
     time = models.TimeField(verbose_name='Дата публикации', default=now)
     content = models.TextField(verbose_name='Текст поста', max_length=10000, blank=True) 
@@ -48,13 +48,12 @@ class Post(models.Model):
 
 
     def __str__(self): 
-        return 'Пост {} {}'.format(self.title, self.time)
+        return '{}'.format(self.title)
 
 
 class Comment(models.Model):
-    user = User.objects.get(id=1)
     now = datetime.now().replace(second=0,microsecond=0).strftime('%H:%M')
-    author = models.ForeignKey(User, on_delete=models.CASCADE, default=user)
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     time = models.TimeField(verbose_name='Время написания комментария', default=now)
     rating = models.IntegerField(verbose_name='Рейтинг комментария', default=0, editable=False)
