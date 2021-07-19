@@ -3,11 +3,11 @@
 
 <h2>Технологии:</h2>
 
-<p>Backend</p>
+<p><b>Backend</b></p>
 
 <p>Django</p>
 
-<p>Frontend</p>
+<p><b>Frontend</b></p>
 
 <p>React.js</p>
 
