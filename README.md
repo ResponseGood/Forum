@@ -11,5 +11,9 @@
 
 <p>React.js</p>
 
+<p><b>Database</b></p>
+
+<p>Sqlite - temporarily</p>
+
 
 
