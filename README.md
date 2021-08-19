@@ -1,5 +1,5 @@
 
-<img src='https://user-images.githubusercontent.com/58743402/122686888-cb43fa80-d23d-11eb-9db7-35e376e06987.png'></img>
+<img src='https://img.shields.io/badge/Forum-version%200.0.1-%23fff'>
 
 <h2>Технологии:</h2>
 
