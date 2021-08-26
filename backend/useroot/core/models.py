@@ -4,7 +4,13 @@ from django.db.models.aggregates import Max
 from django_extensions.db.fields import AutoSlugField
 from autoslug import AutoSlugField
 from django.contrib.auth import get_user_model
-#class User(models.Model):
+
+
+
+
+
+class User(models.Model):
+    pass
 #   status             
 #   count_posts
 #   count_likes

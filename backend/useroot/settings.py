@@ -26,7 +26,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'crispy_forms',
     'useroot.core',
-    'drf_yasg'
+    'drf_yasg',
+    'djoser'
 ]
 
 REST_FRAMEWORK = {
