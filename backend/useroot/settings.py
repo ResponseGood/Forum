@@ -128,9 +128,9 @@ DATE_FORMAT = '%H:%M'
 
 EMAIL_HOST = 'smtp.gmail.com' 
 
-EMAIL_HOST_USER = 'youngprogrammers067@gmail.com' 
+EMAIL_HOST_USER = '' 
 
-EMAIL_HOST_PASSWORD = 'LbXxgqDcH5e2A7p' 
+EMAIL_HOST_PASSWORD = '' 
 
 EMAIL_PORT = 587 
 
