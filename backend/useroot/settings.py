@@ -1,8 +1,6 @@
 import os
+import random
 from pathlib import Path
-
-
-
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -76,16 +74,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'useroot.wsgi.application'
 
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -132,15 +126,17 @@ USE_TZ = False
 
 DATE_FORMAT = '%H:%M'
 
-EMAIL_HOST ='smtp.server' 
+EMAIL_HOST = 'smtp.gmail.com' 
 
-EMAIL_PORT = 25 
+EMAIL_HOST_USER = 'youngprogrammers067@gmail.com' 
 
-EMAIL_HOST_USER = 'username'
+EMAIL_HOST_PASSWORD = 'LbXxgqDcH5e2A7p' 
 
-EMAIL_HOST_PASSWORD = 'secret'
+EMAIL_PORT = 587 
 
 EMAIL_USE_TLS = True
+
+EMAIL_USE_SSL = False
 
 STATIC_URL = '/static/'
 
@@ -150,10 +146,9 @@ ROOT_PATH = os.path.dirname(__file__)
 
 STATICFILES_DIRS = [os.path.join(ROOT_PATH, 'static')]
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'front/build/static')]
-
 
 LOGIN_REDIRECT_URL =  '/'
 
