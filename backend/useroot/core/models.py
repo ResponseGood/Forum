@@ -1,27 +1,12 @@
 from datetime import datetime
 from django.db import models
-from django.db.models.aggregates import Max
-from django_extensions.db.fields import AutoSlugField
 from autoslug import AutoSlugField
 from django.contrib.auth import get_user_model
-
-
-
+from django_extensions.db.fields import AutoSlugField
 
 
 class User(models.Model):
     pass
-#   status             
-#   count_posts
-#   count_likes
-#   count_comments
-#   counts_offers
-#   email
-#   username
-#   inviter
-
-
-
 
 class Category(models.Model):
     name_category = models.CharField(verbose_name='Название категории', max_length=30)
@@ -34,7 +19,6 @@ class Category(models.Model):
     def __str__(self): 
         return '{}'.format(self.name_category)
 
-    
 class Post(models.Model):
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     title = models.CharField(verbose_name='Заголовок', max_length=100)
@@ -46,16 +30,12 @@ class Post(models.Model):
     slug = AutoSlugField(populate_from='title')
     is_official_article = models.BooleanField(verbose_name='Официальный', default=False)
     open_comments = models.BooleanField(verbose_name='Возможность комментировать', default=True)
-
     class Meta:
         verbose_name = "Посты"
         verbose_name_plural = "Посты"
 
-
-
     def __str__(self): 
         return '{}'.format(self.title)
-
 
 class Comment(models.Model):
     now = datetime.now().replace(second=0,microsecond=0).strftime('%H:%M')
@@ -68,11 +48,5 @@ class Comment(models.Model):
     class Meta:
         verbose_name = "Комментарии"
         verbose_name_plural = "Комментарии"
-
     def __str__(self): 
         return '{} {}'.format(self.text, self.time)
-
-    
-
-
-              
