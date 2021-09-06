@@ -1,5 +1,4 @@
 import os
-import random
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
