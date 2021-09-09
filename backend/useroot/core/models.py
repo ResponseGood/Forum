@@ -18,7 +18,6 @@ class Category(models.Model):
 
     def __str__(self): 
         return '{}'.format(self.name_category)
-
 class Post(models.Model):
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     title = models.CharField(verbose_name='Заголовок', max_length=100)
@@ -36,7 +35,6 @@ class Post(models.Model):
 
     def __str__(self): 
         return '{}'.format(self.title)
-
 class Comment(models.Model):
     now = datetime.now().replace(second=0,microsecond=0).strftime('%H:%M')
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)

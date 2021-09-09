@@ -1,8 +1,6 @@
 from rest_framework import routers
-from  .views import PostsView, UsersView
+from  .views import PostsView
 
 router = routers.DefaultRouter()
-router.register('api/v1/get_all_posts', PostsView, 'posts')
-router.register('api/v1/get_all_users', UsersView, 'users')
+router.register('api/get_all_posts', PostsView, 'posts')
 urlpatterns = router.urls
-
