@@ -1,11 +1,7 @@
 import React from 'react';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
-  
+import News from '../News/News';
+import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
+
 export default function Header () {
     return (
         <div>
@@ -47,7 +43,7 @@ export default function Header () {
 }
 
 function Home() {
-    return <h2>Home</h2>;
+    return <News />;
 }
 function Rules() {
     return <h2>Rules</h2>
