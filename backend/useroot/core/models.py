@@ -2,7 +2,6 @@ from datetime import datetime
 from django.db import models
 from autoslug import AutoSlugField
 from django.contrib.auth import get_user_model
-from django_extensions.db.fields import AutoSlugField
 
 
 class User(models.Model):
@@ -18,12 +17,12 @@ class Category(models.Model):
 
     def __str__(self): 
         return '{}'.format(self.name_category)
+
 class Post(models.Model):
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     title = models.CharField(verbose_name='Заголовок', max_length=100)
     category = models.ForeignKey(Category, verbose_name='Категория', on_delete=models.CASCADE)
-    now = datetime.now().replace(second=0,microsecond=0).strftime('%H:%M')
-    time = models.TimeField(verbose_name='Дата публикации', default=now)
+    time = models.TimeField(auto_now_add=True,verbose_name='Дата публикации')
     content = models.TextField(verbose_name='Текст поста', max_length=10000, blank=True) 
     img = models.ImageField(verbose_name='Изображение', upload_to='images/', blank=True)
     slug = AutoSlugField(populate_from='title')
@@ -35,6 +34,7 @@ class Post(models.Model):
 
     def __str__(self): 
         return '{}'.format(self.title)
+
 class Comment(models.Model):
     now = datetime.now().replace(second=0,microsecond=0).strftime('%H:%M')
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)

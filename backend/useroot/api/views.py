@@ -1,7 +1,6 @@
 from useroot.core.models import Post
-from django.contrib.auth.models import User
-from rest_framework import viewsets, permissions
 from .serializers import PostsSerializer
+from rest_framework import viewsets, permissions
 
 
 class PostsView(viewsets.ModelViewSet):
