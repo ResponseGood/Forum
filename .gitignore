@@ -3,3 +3,4 @@ db.sqlite3
 **/node_modules
 __pycache__/
 env
+backend/useroot/settings.py

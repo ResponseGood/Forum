@@ -105,8 +105,18 @@ DJOSER = {
     'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': '#/activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
+    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
     'SERIALIZERS': {},
 }
+
+#SMTP
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com' 
+EMAIL_HOST_USER = '' 
+EMAIL_HOST_PASSWORD = '' 
+EMAIL_PORT = 465
+
+
 HIDE_USERS = True
 
 ACCOUNT_ACTIVATION_DAYS = 1
@@ -125,13 +135,6 @@ USE_TZ = False
 
 DATE_FORMAT = '%H:%M'
 
-EMAIL_HOST = 'smtp.gmail.com' 
-
-EMAIL_HOST_USER = '' 
-
-EMAIL_HOST_PASSWORD = '' 
-
-EMAIL_PORT = 587 
 
 EMAIL_USE_TLS = True
 

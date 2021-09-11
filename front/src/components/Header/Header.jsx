@@ -2,7 +2,7 @@ import React from 'react';
 import News from '../News/News';
 import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
 
-export default function Header () {
+export default function Header (props) {
     return (
         <div>
             <Router>
