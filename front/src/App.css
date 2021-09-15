@@ -20,7 +20,7 @@
 }
 
 
-a:visited, a:active {
+a:visited,a:active {
   color:rgb(255, 255, 255);
 }
 
@@ -31,4 +31,28 @@ li {
 .search, .log-in {
   float:right !important; 
   margin-right:10px !important;
+}
+
+form, label, input {
+  display:block;
+  margin:auto;
+  text-align:center;
+}
+
+button {
+  display:block;
+  margin:auto;
+  appearance: none;
+  border:0;
+  border-radius:5px;
+  background:#000000;
+  color:#fff;
+  padding: 8px 16px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.post {
+  margin-top:50px;
+  text-align:center;
 }

@@ -2,10 +2,11 @@ from datetime import datetime
 from django.db import models
 from autoslug import AutoSlugField
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import AbstractUser
 
+class User(AbstractUser):
+    avatar = models.ImageField(verbose_name='Аватар', blank=True)
 
-class User(models.Model):
-    pass
 
 class Category(models.Model):
     name_category = models.CharField(verbose_name='Название категории', max_length=30)

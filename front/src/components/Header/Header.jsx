@@ -1,8 +1,22 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import News from '../News/News';
+import LoginForm from '../LoginForm/LoginForm';
 import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
 
 export default function Header (props) {
+    const [users, setUser] = useState([])
+    useEffect(() => {
+        axios.get('http://127.0.0.1:8000/auth/users/me')
+        .then(res => {
+            console.log(res.data)
+            setUser(res.data)
+
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }, [])
     return (
         <div>
             <Router>
@@ -25,7 +39,7 @@ export default function Header (props) {
                         <Rules />
                     </Route>
                     <Route path="/login">
-                        <LoginForm />
+                        <Login />
                     </Route>
                     <Route path="/search">
                         <Search />
@@ -48,8 +62,8 @@ function Home() {
 function Rules() {
     return <h2>Rules</h2>
 }
-function LoginForm() {
-    return <h2>Login</h2>
+function Login() {
+    return <LoginForm />
 
 }
 function Search() {
