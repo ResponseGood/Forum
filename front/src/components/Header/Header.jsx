@@ -5,7 +5,7 @@ import LoginForm from '../LoginForm/LoginForm';
 import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
 
 export default function Header (props) {
-    const [users, setUser] = useState([])
+    const [user, setUser] = useState({})
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/auth/users/me')
         .then(res => {
@@ -17,6 +17,21 @@ export default function Header (props) {
             console.log(err)
         })
     }, [])
+    let isLoggedIn = false;
+    if (user.username) {
+        isLoggedIn = true;
+    }
+
+    const renderAuthButton = () => {
+      if (isLoggedIn) {
+        const avatar = user.avatar
+        console.log(avatar)
+        return <img key={user.id} className='log-in' src={avatar}><Link to="/profile"></Link></img>
+      } else {
+        return <li key={user.id} className='log-in'><Link to="/login">Войти</Link></li>
+      }
+    }
+
     return (
         <div>
             <Router>
@@ -29,29 +44,29 @@ export default function Header (props) {
                             <li><Link to="/rules">Правила</Link></li>
                             <li><Link to="/">Темы</Link></li>
                             <li><Link to="/chat">Чат</Link></li>
-                            <li className='log-in'><Link to="/login">Войти</Link></li>
+                            {renderAuthButton()}
                             <li className='search'><Link to="/search">Поиск</Link></li>
-                        </ul>
-                    </nav>
-                </div>
-                <Switch>
-                    <Route path="/rules">
-                        <Rules />
-                    </Route>
-                    <Route path="/login">
-                        <Login />
-                    </Route>
-                    <Route path="/search">
-                        <Search />
-                    </Route>
-                    <Route path="/chat">
-                        <Chat />
-                    </Route>
-                    <Route path="/">
-                        <Home />
-                    </Route>
-                </Switch>
-            </Router>
+                </ul>
+            </nav>
+        </div>
+        <Switch>
+                <Route path="/rules">
+                    <Rules />
+                </Route>
+                <Route path="/login">
+                    <Login />
+                </Route>
+                <Route path="/search">
+                    <Search />
+                </Route>
+                <Route path="/chat">
+                    <Chat />
+                </Route>
+                <Route path="/">
+                    <Home />
+                </Route>
+        </Switch>
+        </Router>
         </div>
     );
 }

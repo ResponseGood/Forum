@@ -16,7 +16,7 @@ export default function News () {
     return (
         <div>
             {posts.map(post => (
-                <p key={post.id} className="post">{post.title} {post.author}</p>
+                <p key={post.id} className="post">{post.title}</p>
             ))}
         </div>
     );
