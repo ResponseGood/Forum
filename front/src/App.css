@@ -28,9 +28,18 @@ li {
   list-style-type: none;
 }
 
-.search, .log-in {
-  float:right !important; 
-  margin-right:10px !important;
+.search {
+  float:right; 
+  margin-right:10px;
+}
+
+.log-in {
+  float:right; 
+  margin-right:10px;
+  border-radius:30px;
+  border:1px solid #FFFFFF;
+  width:30px;
+  height:30px;
 }
 
 form, label, input {

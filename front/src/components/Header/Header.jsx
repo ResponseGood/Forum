@@ -24,9 +24,7 @@ export default function Header (props) {
 
     const renderAuthButton = () => {
       if (isLoggedIn) {
-        const avatar = user.avatar
-        console.log(avatar)
-        return <img key={user.id} className='log-in' src={avatar}><Link to="/profile"></Link></img>
+        return <img key={user.id} className='log-in' src={user.avatar}></img>
       } else {
         return <li key={user.id} className='log-in'><Link to="/login">Войти</Link></li>
       }
@@ -44,27 +42,28 @@ export default function Header (props) {
                             <li><Link to="/rules">Правила</Link></li>
                             <li><Link to="/">Темы</Link></li>
                             <li><Link to="/chat">Чат</Link></li>
-                            {renderAuthButton()}
+                            <li>{renderAuthButton()}</li>
                             <li className='search'><Link to="/search">Поиск</Link></li>
-                </ul>
-            </nav>
+                        </ul>
+                    </nav>
         </div>
         <Switch>
-                <Route path="/rules">
-                    <Rules />
-                </Route>
-                <Route path="/login">
-                    <Login />
-                </Route>
-                <Route path="/search">
-                    <Search />
-                </Route>
-                <Route path="/chat">
-                    <Chat />
-                </Route>
-                <Route path="/">
-                    <Home />
-                </Route>
+
+            <Route path="/rules">
+                <Rules />
+            </Route>
+            <Route path="/login">
+                <Login />
+            </Route>
+            <Route path="/search">
+                <Search />
+            </Route>
+            <Route path="/chat">
+                <Chat />
+            </Route>
+            <Route path="/">
+                <Home />
+            </Route>
         </Switch>
         </Router>
         </div>

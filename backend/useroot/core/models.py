@@ -2,6 +2,7 @@ import os
 from uuid import uuid4
 from django.db import models
 from datetime import datetime
+from django.conf import settings
 from autoslug import AutoSlugField
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser
@@ -17,7 +18,7 @@ def rename_avatar(path):
     return wrapper
 
 class User(AbstractUser):
-    avatar = models.ImageField(verbose_name='Аватар', blank=True, upload_to=rename_avatar('avatars/'))
+    avatar = models.ImageField(verbose_name='Аватар', blank=True, upload_to=rename_avatar(settings.MEDIA_ROOT))
     REQUIRED_FIELDS = ['avatar', 'email', 'first_name', 'last_name']
 
 class Category(models.Model):

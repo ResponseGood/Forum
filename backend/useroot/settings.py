@@ -11,9 +11,6 @@ SECRET_KEY = '3=m)w@4b%1x7jbosaek8r7$%-4vj370$)=y7b+nig^g002qqdo'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -137,17 +134,20 @@ EMAIL_USE_TLS = True
 
 EMAIL_USE_SSL = False
 
+
+#STATIC AND MEDIA
 STATIC_URL = '/static/'
-
 STATIC_ROOT = BASE_DIR / 'static'
-
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
 ROOT_PATH = os.path.dirname(__file__)
-
-STATICFILES_DIRS = [os.path.join(ROOT_PATH, 'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'front/build/static')]
+MEDIA_ROOT =  os.path.join(BASE_DIR / 'backend/useroot/media')
+MEDIA_URL = '/media/'
 
 EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
-
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'front/build/static')]
 
 LOGIN_REDIRECT_URL =  '/'
 
