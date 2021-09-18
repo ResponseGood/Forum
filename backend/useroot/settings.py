@@ -27,8 +27,7 @@ INSTALLED_APPS = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -151,6 +150,6 @@ EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
 
 LOGIN_REDIRECT_URL =  '/'
 
-APPEND_SLASH = True
+APPEND_SLASH = False
 
 AUTH_USER_MODEL = 'core.User'

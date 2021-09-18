@@ -7,7 +7,7 @@ import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
 export default function Header (props) {
     const [user, setUser] = useState({})
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/auth/users/me')
+        axios.get('http://127.0.0.1:8000/auth/users/me/')
         .then(res => {
             console.log(res.data)
             setUser(res.data)
@@ -22,9 +22,9 @@ export default function Header (props) {
         isLoggedIn = true;
     }
 
-    const renderAuthButton = () => {
+    const checkAuth = () => {
       if (isLoggedIn) {
-        return <img key={user.id} className='log-in' src={user.avatar}></img>
+        return <img key={user.id} className='avatar' src={user.avatar}></img>
       } else {
         return <li key={user.id} className='log-in'><Link to="/login">Войти</Link></li>
       }
@@ -42,7 +42,7 @@ export default function Header (props) {
                             <li><Link to="/rules">Правила</Link></li>
                             <li><Link to="/">Темы</Link></li>
                             <li><Link to="/chat">Чат</Link></li>
-                            <li>{renderAuthButton()}</li>
+                            <li>{checkAuth()}</li>
                             <li className='search'><Link to="/search">Поиск</Link></li>
                         </ul>
                     </nav>

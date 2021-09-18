@@ -33,13 +33,18 @@ li {
   margin-right:10px;
 }
 
-.log-in {
+.avatar {
   float:right; 
   margin-right:10px;
   border-radius:30px;
   border:1px solid #FFFFFF;
   width:30px;
   height:30px;
+}
+
+.log-in {
+  float:right; 
+  margin-right:10px;
 }
 
 form, label, input {

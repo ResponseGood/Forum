@@ -19,7 +19,7 @@ def rename_avatar(path):
 
 class User(AbstractUser):
     avatar = models.ImageField(verbose_name='Аватар', blank=True, upload_to=rename_avatar(settings.MEDIA_ROOT))
-    REQUIRED_FIELDS = ['avatar', 'email', 'first_name', 'last_name']
+    REQUIRED_FIELDS = ['avatar', 'email', 'first_name', 'last_name', 'date_joined']
 
 class Category(models.Model):
     name_category = models.CharField(verbose_name='Название категории', max_length=30)
@@ -33,15 +33,16 @@ class Category(models.Model):
         return '{}'.format(self.name_category)
 
 class Post(models.Model):
-    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(verbose_name='Заголовок', max_length=100)
     category = models.ForeignKey(Category, verbose_name='Категория', on_delete=models.CASCADE)
     time = models.TimeField(auto_now_add=True,verbose_name='Дата публикации')
-    content = models.TextField(verbose_name='Текст поста', max_length=10000, blank=True) 
+    content = models.TextField(verbose_name='Текст поста', blank=True) 
     img = models.ImageField(verbose_name='Изображение', upload_to='images/', blank=True)
     slug = AutoSlugField(populate_from='title')
     is_official_article = models.BooleanField(verbose_name='Официальный', default=False)
     open_comments = models.BooleanField(verbose_name='Возможность комментировать', default=True)
+
     class Meta:
         verbose_name = "Посты"
         verbose_name_plural = "Посты"
