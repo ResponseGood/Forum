@@ -7,18 +7,8 @@ from autoslug import AutoSlugField
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser
 
-def rename_avatar(path):
-    def wrapper(instance, filename):
-        ext = filename.split('.')[-1]
-        if instance.pk:
-            filename = '{}.{}'.format(instance.pk, ext)
-        else:
-            filename = '{}.{}'.format(uuid4().hex, ext)
-        return os.path.join(path, filename)
-    return wrapper
-
 class User(AbstractUser):
-    avatar = models.ImageField(verbose_name='Аватар', blank=True, upload_to=rename_avatar(settings.MEDIA_ROOT))
+    avatar = models.ImageField(verbose_name='Аватар', blank=True, upload_to=settings.MEDIA_ROOT)
     REQUIRED_FIELDS = ['avatar', 'email', 'first_name', 'last_name', 'date_joined']
 
 class Category(models.Model):

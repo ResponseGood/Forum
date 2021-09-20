@@ -1,6 +1,7 @@
-from useroot.core.models import Post
-from .serializers import PostsSerializer
+from useroot.core.models import Post, User
 from rest_framework import viewsets, permissions
+from .serializers import PostsSerializer, UserSerializer
+
 
 class PostsView(viewsets.ModelViewSet):
     queryset = Post.objects.all()

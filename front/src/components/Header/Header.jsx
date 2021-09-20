@@ -48,7 +48,6 @@ export default function Header (props) {
                     </nav>
         </div>
         <Switch>
-
             <Route path="/rules">
                 <Rules />
             </Route>
