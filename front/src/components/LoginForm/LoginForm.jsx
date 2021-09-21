@@ -1,24 +1,42 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Button from '../ButtonLogin/ButtonLogin';
+import {Redirect} from "react-router-dom";
 
-function Login() {
-  const [username, setUsername] = useState({});
-  const [password, setPassword] = useState({});
-  let LoginHandler = () => {
-    let res = axios({method: 'post',url:'http://127.0.0.1:8000/auth/token/login/', headers: {}, data: {username:setUsername, password:setPassword}});
-    console.log(1);
+class LoginForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { username: '', password: '' };
   }
-  return (
-    <div>
-      <form>
-        <label>Войти</label>
-        <input value={username} onInput={e => setUsername(e.target.value)} type="text" id="username" placeholder="Логин"/>
-        <input value={password} onInput={e => setPassword(e.target.value)} type="text" id="password" placeholder="Пароль"/>
-        <Button text='ок' type="submit" handler={LoginHandler}/>
-      </form> 
-    </div>
+  mySubmitHandler = (event) => {
+    event.preventDefault();
+    axios({method: 'post',url:'http://127.0.0.1:8000/auth/token/login/', headers: {}, data: {username:this.state.username, password:this.state.password}})
+    .then(res => {
+      let token = res.data
+      console.log(token.auth_token)
+      console.log(res.headers);
+      axios.defaults.headers.common['Authorization'] = `Token ${token.auth_token}`;
+      console.log(res.headers);
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+  usernameHandler = (event) => {
+    this.setState({username: event.target.value});
+  }
+  passwordHandler = (event) => {
+    this.setState({password: event.target.value});
+  }
+  render() {
+    return (
+      <form onSubmit={this.mySubmitHandler}>
+        <label className="title-lgn">Вход</label>
+        <input type='text' onChange={this.usernameHandler} placeholder='Логин' className='login-input'/>
+        <input type='password' onChange={this.passwordHandler} placeholder='Пароль' className='password-input'/>
+        <label className="acc-registration">У меня нет аккаунта</label>
+        <input type='submit' className='btn-login' value='ок'/>
+      </form>
     );
   }
-  
-export default Login;
+}
+export default LoginForm; 

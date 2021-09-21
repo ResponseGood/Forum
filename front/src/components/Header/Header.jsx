@@ -6,30 +6,30 @@ import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
 
 export default function Header (props) {
     const [user, setUser] = useState({})
+    let isLoggedIn = false;
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/auth/users/me/')
         .then(res => {
-            console.log(res.data)
             setUser(res.data)
-
         })
         .catch(err => {
             console.log(err)
         })
     }, [])
-    let isLoggedIn = false;
     if (user.username) {
-        isLoggedIn = true;
+        isLoggedIn = true
     }
-
-    const checkAuth = () => {
-      if (isLoggedIn) {
-        return <img key={user.id} className='avatar' src={user.avatar}></img>
+    const isAuthAvatar = () => {
+        if (isLoggedIn) {
+            if (!user.avatar) {
+                return <img key={user.id} className='avatar' src='http://127.0.0.1:8000/media/C%3A/Users/cewim/Desktop/GitHub/Forum/backend/useroot/media/default.png'></img>
+            } else {
+                return <img key={user.id} className='avatar' src={user.avatar}></img>
+            }
       } else {
-        return <li key={user.id} className='log-in'><Link to="/login">Войти</Link></li>
+          return <li key={user.id} className='log-in'><Link to="/login">Войти</Link></li>
       }
     }
-
     return (
         <div>
             <Router>
@@ -42,29 +42,29 @@ export default function Header (props) {
                             <li><Link to="/rules">Правила</Link></li>
                             <li><Link to="/">Темы</Link></li>
                             <li><Link to="/chat">Чат</Link></li>
-                            <li>{checkAuth()}</li>
+                            <li>{isAuthAvatar()}</li>
                             <li className='search'><Link to="/search">Поиск</Link></li>
                         </ul>
                     </nav>
-        </div>
-        <Switch>
-            <Route path="/rules">
-                <Rules />
-            </Route>
-            <Route path="/login">
-                <Login />
-            </Route>
-            <Route path="/search">
-                <Search />
-            </Route>
-            <Route path="/chat">
-                <Chat />
-            </Route>
-            <Route path="/">
-                <Home />
-            </Route>
-        </Switch>
-        </Router>
+                </div>
+                <Switch>
+                    <Route path="/rules">
+                        <Rules />
+                    </Route>
+                    <Route path="/login">
+                        <Login />
+                    </Route>
+                    <Route path="/search">
+                        <Search />
+                    </Route>
+                    <Route path="/chat">
+                        <Chat />
+                    </Route>
+                    <Route path="/">
+                        <Home />
+                    </Route>
+                </Switch>
+            </Router>
         </div>
     );
 }

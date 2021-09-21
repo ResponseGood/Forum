@@ -53,7 +53,7 @@ form, label, input {
   text-align:center;
 }
 
-button {
+.btn-login {
   display:block;
   margin:auto;
   appearance: none;
@@ -64,9 +64,26 @@ button {
   padding: 8px 16px;
   font-size:16px;
   cursor:pointer;
+  margin-top:30px;
 }
 
 .post {
   margin-top:50px;
   text-align:center;
+}
+
+.login-input,.password-input {
+  margin-top:50px;
+  padding:15px;
+  border-radius:5px;
+}
+
+.title-lgn {
+  font-size:25px;
+  margin-top:50px;
+}
+
+.acc-registration {
+  font-size:15px;
+
 }
