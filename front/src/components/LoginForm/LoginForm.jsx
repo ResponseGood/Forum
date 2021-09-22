@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {Redirect} from "react-router-dom";
+import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -12,9 +12,7 @@ class LoginForm extends React.Component {
     axios({method: 'post',url:'http://127.0.0.1:8000/auth/token/login/', headers: {}, data: {username:this.state.username, password:this.state.password}})
     .then(res => {
       let token = res.data
-      console.log(token.auth_token)
-      console.log(res.headers);
-      axios.defaults.headers.common['Authorization'] = `Token ${token.auth_token}`;
+      res.setHeader('Authorization',`Token ${token.auth_token}`);
       console.log(res.headers);
     })
     .catch(err => {
@@ -29,11 +27,11 @@ class LoginForm extends React.Component {
   }
   render() {
     return (
-      <form onSubmit={this.mySubmitHandler}>
+      <form onSubmit={this.mySubmitHandler} className="container-column">
         <label className="title-lgn">Вход</label>
-        <input type='text' onChange={this.usernameHandler} placeholder='Логин' className='login-input'/>
-        <input type='password' onChange={this.passwordHandler} placeholder='Пароль' className='password-input'/>
-        <label className="acc-registration">У меня нет аккаунта</label>
+        <input type='text' onChange={this.usernameHandler} placeholder='Логин' className='login-input' required/>
+        <input type='password' onChange={this.passwordHandler} placeholder='Пароль' className='password-input' required/>
+        <label className="label-registration">У меня нет аккаунта</label>
         <input type='submit' className='btn-login' value='ок'/>
       </form>
     );
