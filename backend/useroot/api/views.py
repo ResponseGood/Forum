@@ -13,7 +13,7 @@ from rest_framework.exceptions import AuthenticationFailed
 from django.core.serializers.json import DjangoJSONEncoder
 from .serializers import PostsSerializer, UserSerializer, CategorySerializer
 
-@action(detail=True,methods=["GET", "POST"])
+@action(detail=True, methods=["GET", "POST"])
 class PostsView(APIView):
     permission_classes = [
         permissions.AllowAny
@@ -24,6 +24,21 @@ class PostsView(APIView):
         return Response(serializer.data)
     def post(self, requset):
         return Response({"message_error":"You can't use a POST request for this method"})
+
+
+@action(detail=True, methods=["GET"])
+class PostView(APIView):
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    def get(self, requset, pk):
+        queryset = Post.objects.filter(id=pk).first()
+        serializer = PostsSerializer(queryset)
+        return Response(serializer.data)
+    def post(self, requset, pk):
+        return Response({"message_error":"You can't use a POST request for this method"})
+
+
 
 
 class RegisterView(APIView):
@@ -45,7 +60,6 @@ class LoginView(APIView):
         email = request.data.get('email')
         password = request.data.get('password')
         ip = request.META.get("REMOTE_ADDR")
-
         user = models.User.objects.filter(email=email).first()
         if user is None:
             raise AuthenticationFailed('User not found')
