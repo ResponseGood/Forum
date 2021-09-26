@@ -48,41 +48,27 @@ export default function Header (props) {
                     </nav>
                 </div>
                 <Switch>
-                    <Route path="/rules">
-                        <Rules />
-                    </Route>
-                    <Route path="/login">
-                        <Login />
-                    </Route>
-                    <Route path="/search">
-                        <Search />
-                    </Route>
-                    <Route path="/chat">
-                        <Chat />
-                    </Route>
-                    <Route path="/">
-                        <Home />
-                    </Route>
+                    <Route path="/rules" component={Rules}/>
+                    <Route path="/login" component={LoginForm}/>
+                    <Route path="/search" component={Search}/>
+                    <Route path="/chat" component={Chat}/>
+                    <Route path="/" component={News}/>
                 </Switch>
             </Router>
         </div>
     );
 }
 
-function Home() {
-    return <News />;
-}
+
 function Rules() {
     return <h2>Rules</h2>
 }
-function Login() {
-    return <LoginForm />
 
-}
 function Search() {
     return <h2>Search</h2>
 
 }
+
 function Chat() {
     return <h2>Chat</h2>
 }

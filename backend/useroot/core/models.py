@@ -11,6 +11,8 @@ class User(AbstractUser):
     email = models.EmailField(verbose_name='email', blank=True, unique=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['avatar', 'username', 'first_name', 'last_name', 'date_joined']
+    def __str__(self):
+        return '{}'.format(self.username)
 
 
 class Post(models.Model):
@@ -55,4 +57,4 @@ class Achievement(models.Model):
         verbose_name_plural = "Достижения"
     
     def __str__(self): 
-        return '{} {}'.format(self.name)
+        return '{}'.format(self.name)

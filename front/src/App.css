@@ -90,3 +90,7 @@ input {
   font-size:15px;
   margin-bottom:10px;
 }
+
+.Chat-title {
+  text-align:center;
+}
