@@ -1,26 +1,17 @@
-import os
-from uuid import uuid4
 from django.db import models
 from datetime import datetime
 from django.conf import settings
 from autoslug import AutoSlugField
+from ..Categories.models import Category
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     avatar = models.ImageField(verbose_name='Аватар', blank=True, upload_to=settings.MEDIA_ROOT)
-    REQUIRED_FIELDS = ['avatar', 'email', 'first_name', 'last_name', 'date_joined']
+    email = models.EmailField(verbose_name='email', blank=True, unique=True)
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['avatar', 'username', 'first_name', 'last_name', 'date_joined']
 
-class Category(models.Model):
-    name_category = models.CharField(verbose_name='Название категории', max_length=30)
-    description = models.CharField(verbose_name='Описание категории', max_length=70)
-    
-    class Meta:
-        verbose_name = "Категории"
-        verbose_name_plural = "Категории"
-
-    def __str__(self): 
-        return '{}'.format(self.name_category)
 
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)

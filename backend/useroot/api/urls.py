@@ -1,6 +1,10 @@
-from rest_framework import routers
-from  .views import PostsView
+from django.urls import path
+from  .views import PostsView, RegisterView, LoginView, UserView, LogoutView
 
-router = routers.DefaultRouter()
-router.register('api/get_all_posts', PostsView, 'posts')
-urlpatterns = router.urls
+urlpatterns = [
+    path('api/get_all_posts/', PostsView.as_view()),
+    path('api/register/', RegisterView.as_view()),
+    path('api/login/', LoginView.as_view()),
+    path('api/me/', UserView.as_view()),
+    path('api/logout/', LogoutView.as_view()),
+]

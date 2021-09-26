@@ -8,7 +8,7 @@ export default function Header (props) {
     const [user, setUser] = useState({})
     let isLoggedIn = false;
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/auth/users/me/')
+        axios.get('http://127.0.0.1:8000/api/me/')
         .then(res => {
             setUser(res.data)
         })

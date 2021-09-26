@@ -5,22 +5,20 @@ import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { username: '', password: '' };
+    this.state = { email: '', password: '' };
   }
   mySubmitHandler = (event) => {
     event.preventDefault();
-    axios({method: 'post',url:'http://127.0.0.1:8000/auth/token/login/', headers: {}, data: {username:this.state.username, password:this.state.password}})
+    axios({method: 'post',url:'http://127.0.0.1:8000/api/login/', headers: {}, data: {email:this.state.email, password:this.state.password}})
     .then(res => {
-      let token = res.data
-      res.setHeader('Authorization',`Token ${token.auth_token}`);
-      console.log(res.headers);
+      console.log(res)
     })
     .catch(err => {
       console.log(err)
     })
   }
-  usernameHandler = (event) => {
-    this.setState({username: event.target.value});
+  emailHandler = (event) => {
+    this.setState({email: event.target.value});
   }
   passwordHandler = (event) => {
     this.setState({password: event.target.value});
@@ -29,7 +27,7 @@ class LoginForm extends React.Component {
     return (
       <form onSubmit={this.mySubmitHandler} className="container-column">
         <label className="title-lgn">Вход</label>
-        <input type='text' onChange={this.usernameHandler} placeholder='Логин' className='login-input' required/>
+        <input type='text' onChange={this.emailHandler} placeholder='Логин' className='login-input' required/>
         <input type='password' onChange={this.passwordHandler} placeholder='Пароль' className='password-input' required/>
         <label className="label-registration">У меня нет аккаунта</label>
         <input type='submit' className='btn-login' value='ок'/>

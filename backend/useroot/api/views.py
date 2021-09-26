@@ -1,11 +1,85 @@
-from useroot.core.models import Post, User
-from rest_framework import viewsets, permissions
-from .serializers import PostsSerializer, UserSerializer
+import jwt, json
+from ..core import models
+from ..settings import SECRET_KEY
+from useroot.core.models import Post
+from rest_framework import permissions
+from datetime import datetime, timedelta
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.decorators import action
+from rest_framework.exceptions import AuthenticationFailed
+from django.core.serializers.json import DjangoJSONEncoder
+from .serializers import PostsSerializer, UserSerializer, CategorySerializer
 
-
-class PostsView(viewsets.ModelViewSet):
-    queryset = Post.objects.all()
+@action(detail=True,methods=["GET", "POST"])
+class PostsView(APIView):
     permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly
+        permissions.AllowAny
     ]
-    serializer_class = PostsSerializer
+    def get(self, requset):
+        queryset = Post.objects.all()
+        serializer = PostsSerializer(queryset, many=True)
+        return Response(serializer.data)
+    def post(self, requset):
+        return Response({"message_error":"You can't use a POST request for this method"})
+
+
+class RegisterView(APIView):
+    def post(self, request):
+        serializer = UserSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+    def create(self, validated_data):
+        password = validated_data.pop('password', None)
+        instance = self.Meta.model(**validated_data)
+        if password is not None:
+            instance.set_password(password)
+        instance.save()
+        return instance
+
+class LoginView(APIView):
+    def post(self, request):
+        email = request.data.get('email')
+        password = request.data.get('password')
+
+        user = models.User.objects.filter(email=email).first()
+        if user is None:
+            raise AuthenticationFailed('User not found')
+        if not user.check_password(password):
+            raise AuthenticationFailed('Invalide password')
+
+        payload = {'id': user.id, 'exp': datetime.utcnow() + timedelta(minutes=20), 'ait': datetime.utcnow()}
+        token = jwt.encode(payload=payload, key=SECRET_KEY, algorithm='HS256', json_encoder=DjangoJSONEncoder)
+        response = Response()
+        response.set_cookie(key='JWT', value=token, httponly=True)
+        response.data = {
+            'JWT': token
+        }
+        return response
+
+class UserView(APIView): 
+    def get(self, request):
+        token = request.COOKIES.get('JWT')
+        if not token:
+            raise AuthenticationFailed('Not Authorized!')
+        try:
+            payload = jwt.decode(jwt=token, key=SECRET_KEY, algorithms=['HS256'])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed('Not Authorized!')
+
+        user = models.User.objects.filter(id=payload['id']).first()
+
+        serializer = UserSerializer(user)
+
+        return Response(serializer.data)
+        
+class LogoutView(APIView):
+    def post(self, request):
+        response = Response()
+        response.delete_cookie('JWT')
+        response.data = {
+            "message": "you've logged out"
+        }
+        return response
+

@@ -6,3 +6,6 @@ drf-yasg
 django-extensions
 django-autoslug
 Pillow
+djangorestframework-simplejwt
+django-cors-headers
+PyJWT==1.7.1
