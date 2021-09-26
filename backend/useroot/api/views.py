@@ -1,12 +1,14 @@
 import jwt, json
 from ..core import models
-from ..settings import SECRET_KEY
 from useroot.core.models import Post
+from django.utils.timezone import pytz
+from django.core.mail import send_mail
 from rest_framework import permissions
 from datetime import datetime, timedelta
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from ..settings import SECRET_KEY, TIME_ZONE
 from rest_framework.exceptions import AuthenticationFailed
 from django.core.serializers.json import DjangoJSONEncoder
 from .serializers import PostsSerializer, UserSerializer, CategorySerializer
@@ -42,6 +44,7 @@ class LoginView(APIView):
     def post(self, request):
         email = request.data.get('email')
         password = request.data.get('password')
+        ip = request.META.get("REMOTE_ADDR")
 
         user = models.User.objects.filter(email=email).first()
         if user is None:
@@ -52,6 +55,14 @@ class LoginView(APIView):
         payload = {'id': user.id, 'exp': datetime.utcnow() + timedelta(minutes=20), 'ait': datetime.utcnow()}
         token = jwt.encode(payload=payload, key=SECRET_KEY, algorithm='HS256', json_encoder=DjangoJSONEncoder)
         response = Response()
+        login_time = pytz.timezone(TIME_ZONE)
+        login_time = login_time.localize(datetime.now())
+        send_mail(
+            subject='Выполнен вход на ваш аккаунт.',
+            message=f'Время {login_time}, IP: {ip}.\nПри необходимости смените пароль.',
+            from_email=None,
+            recipient_list=[email],
+        )
         response.set_cookie(key='JWT', value=token, httponly=True)
         response.data = {
             'JWT': token
