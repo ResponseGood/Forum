@@ -10,4 +10,3 @@
   <li><p>Django-Rest-Framework</p></li>
   <li><p>Djoser</p></li>
 <ol/>
-<p>Open <a href="https://github.com/ResponseGood/Forum/issues">tasks.</a></p>
