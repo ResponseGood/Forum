@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React from 'react';
-import {Redirect} from "react-router-dom";
+
 
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { email: '', password: '', popup:true};
+    this.state = { email: '', password: ''};
+    this.mySubmitHandler = this.mySubmitHandler.bind(this)
   }
   mySubmitHandler = (event) => {
     event.preventDefault();
@@ -13,12 +14,13 @@ class LoginForm extends React.Component {
     .then(res => {
       console.log(res);
       event.target.reset();
+      this.props.history.push('/');
+      window.location.reload();
     })
     .catch(err => {
       console.log(err);
       event.target.reset();
     })
-    return <Redirect to="/"/>
   }
   emailHandler = (event) => {
     this.setState({email: event.target.value});

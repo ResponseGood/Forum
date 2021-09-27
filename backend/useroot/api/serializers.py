@@ -12,7 +12,7 @@ class PostsSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ("id", "username", "email", "password", "avatar")
+        fields = ("id", "username", "email", "password", "avatar", "status")
         extra_kwargs = {'password': {'write_only': True}}
 
 class CategorySerializer(serializers.ModelSerializer):

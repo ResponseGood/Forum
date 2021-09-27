@@ -4,7 +4,7 @@
 }
 
 .navigation {
-  padding-top:10px;
+  padding-top:15px;
   text-align:left;
   background-color:rgb(0, 0, 0);
   width:100%;
@@ -12,6 +12,7 @@
 } 
 
 .navigation a {
+  padding-bottom:5px;
   color:rgb(255, 255, 255);
   margin-left:35px;
   font-size:20px;
@@ -36,8 +37,9 @@ li {
 .avatar {
   float:right; 
   margin-right:10px;
+  margin-top:-5px;
   border-radius:30px;
-  border:1px solid #FFFFFF;
+  border:1px solid #9c9c9c;
   width:30px;
   height:30px;
 }

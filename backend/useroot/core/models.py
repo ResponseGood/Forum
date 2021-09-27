@@ -9,6 +9,7 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     avatar = models.ImageField(verbose_name='Аватар', blank=True, upload_to=settings.MEDIA_ROOT)
     email = models.EmailField(verbose_name='email', blank=True, unique=True)
+    status = models.CharField(verbose_name='Статус пользователя', max_length=30, default='')
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['avatar', 'username', 'first_name', 'last_name', 'date_joined']
     def __str__(self):

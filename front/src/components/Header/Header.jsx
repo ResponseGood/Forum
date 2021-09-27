@@ -22,19 +22,19 @@ export default function Header (props) {
     const isAuthAvatar = () => {
         if (isLoggedIn) {
             if (!user.avatar) {
-                return <img key={user.id} className='avatar' src='http://127.0.0.1:8000/media/C%3A/Users/cewim/Desktop/GitHub/Forum/backend/useroot/media/default.png'></img>
+                return <img key={user.id} className='avatar' src='http://127.0.0.1:8000/media/C%3A/Users/cewim/Desktop/GitHub/Forum/backend/useroot/media/default.png'/>
             } else {
-                return <img key={user.id} className='avatar' src={user.avatar}></img>
+                return <img key={user.id} className='avatar' src={user.avatar}/>
             }
       } else {
           return <li key={user.id} className='log-in'><Link to="/login">Войти</Link></li>
       }
     }
     return (
-        <div>
+        <>
+            <meta charSet="utf-8"/>
+            <meta name="viewport" content="width=device-width"/>
             <Router>
-                <meta charSet="utf-8"></meta>
-                <meta name="viewport" content="width=device-width"></meta>
                 <div className="navigation">
                     <nav>
                         <ul>
@@ -53,22 +53,23 @@ export default function Header (props) {
                     <Route path="/search" component={Search}/>
                     <Route path="/chat" component={Chat}/>
                     <Route path="/" component={News}/>
+                    <Route path="/profile/" component={Profile}/>
                 </Switch>
             </Router>
-        </div>
+        </>
     );
 }
 
-
+function Profile () {
+    return <h1>Profile</h1>
+}
 function Rules() {
     return <h2>Rules</h2>
 }
-
 function Search() {
     return <h2>Search</h2>
 
 }
-
 function Chat() {
     return <h2>Chat</h2>
 }
