@@ -11,5 +11,5 @@
   <li><p>Django-Rest-Framework</p></li>
   <li><p>Djoser</p></li>
   <li><p>Djoser</p></li>
-  <li><p>Simple JWT</p></li>
+  <li><p>Simple-JWT</p></li>
 <ol/>
