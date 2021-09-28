@@ -1,11 +1,10 @@
 from rest_framework import serializers
 from useroot.core.models import Post, User
-from useroot.Categories.models import Category
 
 class PostsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ("id", "slug","title", "author","content", "img", "category")
+        fields = ("id", "slug","title", "author","content", "img")
         read_only_fields = ('author', 'id', 'slug')
 
 
@@ -15,9 +14,10 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ("id", "username", "email", "password", "avatar", "status")
         extra_kwargs = {'password': {'write_only': True}}
 
-class CategorySerializer(serializers.ModelSerializer):
+
+class UserPublicDataSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Category
-        #fields
+        model = User
+        fields = ("id", "username","avatar", "status")
 
 

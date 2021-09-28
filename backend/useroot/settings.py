@@ -24,7 +24,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'crispy_forms',
     'useroot.core',
-    'useroot.Categories',
     'drf_yasg',
     'djoser',
 ]
@@ -83,7 +82,6 @@ DATABASES = {
         'PASSWORD' : 'admin',
         'HOST' : '127.0.0.1',
         'PORT' : '5432',
-        
     }
 }
 
@@ -131,7 +129,7 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': False,
-    'UPDATE_LAST_LOGIN': False,
+    'UPDATE_LAST_LOGIN': True,
     'ALGORITHM': 'HS256',
     'SIGNING_KEY':SECRET_KEY,
     'VERIFYING_KEY': None,

@@ -2,7 +2,6 @@ from django.db import models
 from datetime import datetime
 from django.conf import settings
 from autoslug import AutoSlugField
-from ..Categories.models import Category
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser
 
@@ -19,7 +18,6 @@ class User(AbstractUser):
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(verbose_name='Заголовок', max_length=100)
-    category = models.ForeignKey(Category, verbose_name='Категория', on_delete=models.CASCADE)
     time = models.TimeField(auto_now_add=True,verbose_name='Дата публикации')
     content = models.TextField(verbose_name='Текст поста', blank=True) 
     img = models.ImageField(verbose_name='Изображение', upload_to='images/', blank=True)

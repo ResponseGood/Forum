@@ -72,7 +72,7 @@ input {
   cursor:pointer;
 }
 
-.post {
+.post, .loading {
   margin-top:50px;
   text-align:center;
 }

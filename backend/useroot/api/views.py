@@ -1,17 +1,18 @@
 import jwt, json
 from ..core import models
-from useroot.core.models import Post
 from django.utils.timezone import pytz
 from django.core.mail import send_mail
 from rest_framework import permissions
 from datetime import datetime, timedelta
 from rest_framework.views import APIView
+from useroot.core.models import Post, User
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from ..settings import SECRET_KEY, TIME_ZONE
+from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.exceptions import AuthenticationFailed
 from django.core.serializers.json import DjangoJSONEncoder
-from .serializers import PostsSerializer, UserSerializer, CategorySerializer
+from .serializers import PostsSerializer, UserPublicDataSerializer, UserSerializer
 
 @action(detail=True, methods=["GET", "POST"])
 class PostsView(APIView):
@@ -98,11 +99,33 @@ class UserView(APIView):
         serializer = UserSerializer(user)
 
         return Response(serializer.data)
+
+
+class UserPublicView(APIView): 
+    def get(self, request, pk):
+        token = request.COOKIES.get('JWT')
+        if not token:
+            raise AuthenticationFailed('Not Authorized!')
+        try:
+            payload = jwt.decode(jwt=token, key=SECRET_KEY, algorithms=['HS256'])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed('Not Authorized!')
+
+        user = models.User.objects.filter(id=payload['id']).first()
+
+        queryset = User.objects.filter(id=pk).first()
+
+        serializer = UserPublicDataSerializer(queryset)
+
+        return Response(serializer.data)
         
 class LogoutView(APIView):
     def post(self, request):
         response = Response()
         response.delete_cookie('JWT')
+        refresh_token = request.data["refresh_token"]
+        token = RefreshToken(refresh_token)
+        token.blacklist()
         response.data = {
             "message": "you've logged out"
         }
