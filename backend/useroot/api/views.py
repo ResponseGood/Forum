@@ -123,9 +123,6 @@ class LogoutView(APIView):
     def post(self, request):
         response = Response()
         response.delete_cookie('JWT')
-        refresh_token = request.data["refresh_token"]
-        token = RefreshToken(refresh_token)
-        token.blacklist()
         response.data = {
             "message": "you've logged out"
         }
