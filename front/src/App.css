@@ -44,55 +44,118 @@ li {
   height:30px;
 }
 
-.log-in {
-  float:right; 
-  margin-right:10px;
-}
-
-form, label, input {
-  margin-top:30px;
-  display:block;
-  margin:auto;
-  padding:15px;
-  text-align:center;
-}
-input {
-  cursor: pointer;
-}
-
-.btn-login {
-  display:block;
-  appearance:none;
-  border:0;
-  border-radius:5px;
-  background:#000000;
-  color:#fff;
-  padding: 8px 16px;
-  font-size:16px;
-  cursor:pointer;
-}
 
 .post, .loading {
   margin-top:50px;
   text-align:center;
 }
 
-.login-input,.password-input {
-  width:13%;
-  border: 1px solid #ccc;
-  background: #FFF;
+.Chat-title {
+  text-align:center;
 }
 
-.title-lgn {
-  font-size:25px;
+.log-in {
+  float:right; 
+  margin-right:10px;
+}
+
+
+.form_wrapper {
+  padding: 50px;
+  position: fixed; top: 50%; left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+input {
+  display: block;
+  box-sizing: border-box;
+  padding:20px;
+  width:300px;
+  margin-bottom:20px;
+  font-size:18px;
+  outline:none;
+  border:1px solid rgb(110, 110, 110);
+}
+
+label {
+  line-height: 2;
+  text-align: left;
+  display: block;
+  margin-bottom: 13px;
+  margin-top: 20px;
+  color: white;
+  font-size: 14px;
+  font-weight: 200;
+}
+
+button[type="submit"],
+input[type="submit"] {
+  background: #000000;
+  color: white;
+  border: none;
+  margin-top: 40px;
+  padding: 20px;
+  font-size: 16px;
+}
+
+button[type="submit"]:active,
+input[type="button"]:active,
+input[type="submit"]:active {
+  transition: 0.3s all;
+  transform: translateY(3px);
+  border: 1px solid transparent;
+  opacity: 0.8;
+}
+
+input:disabled {
+  opacity: 0.4;
+}
+
+input[type="button"]:hover {
+  transition: 0.3s all;
+}
+
+button[type="submit"],
+input[type="button"],
+input[type="submit"] {
+  -webkit-appearance: none;
+}
+
+button[type="button"] {
+  display: block;
+  appearance: none;
+  background: #333;
+  color: white;
+  border: none;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
+hr {
+  margin-top: 30px;
+}
+
+button {
+  display: block;
+  appearance: none;
+  margin-top: 40px;
+  border: 1px solid #333;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.loader {
+  display: grid;
+  align-items: center;
+  justify-content: center;
   margin-top:50px;
 }
 
-.label-registration {
-  font-size:15px;
-  margin-bottom:10px;
-}
-
-.Chat-title {
+.registration-label {
   text-align:center;
+  color:black;
+  font-size:20px;
 }

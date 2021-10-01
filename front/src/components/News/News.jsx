@@ -19,7 +19,7 @@ export default function News () {
     return (
         <div>
             {loading ? (
-                <p className="loading">Загрузка...</p>
+                <h2 className="loading">Загрузка...</h2>
             ):(
                 posts.map(post => (
                     <p key={post.id} className="post">{post.title}</p>

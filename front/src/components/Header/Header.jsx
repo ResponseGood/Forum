@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import News from '../News/News';
-import LoginForm from '../LoginForm/LoginForm';
+import LoginForm from '..//LoginForm/LoginForm';
 import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
 
 export default function Header (props) {
@@ -53,7 +53,7 @@ export default function Header (props) {
                     <Route path="/search" component={Search}/>
                     <Route path="/chat" component={Chat}/>
                     <Route path="/" component={News}/>
-                    <Route path="/profile/" component={Profile}/>
+                    <Route path="/me" component={Profile}/>
                 </Switch>
             </Router>
         </>
