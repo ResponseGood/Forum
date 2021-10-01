@@ -4,6 +4,7 @@
 <ol>
   <li><p>React.js</p></li>
   <li><p>React-router</p></li>
+  <li><p>Hook Form</p></li>
 </ol>
 <p>Backend Technologies and packages.</p>
 <ol>
