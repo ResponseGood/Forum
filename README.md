@@ -5,6 +5,7 @@
   <li><p>React.js</p></li>
   <li><p>React-router</p></li>
   <li><p>React-Hook-Form</p></li>
+  <li><p>Axios</p></li>
 </ol>
 <p>Backend Technologies and packages.</p>
 <ol>
