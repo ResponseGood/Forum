@@ -9,7 +9,7 @@ export default function LoginForm () {
   });
   const history = useHistory();
   const onSubmit = (data) => {
-    axios({method: 'post',url:'http://127.0.0.1:8000/api/login/', headers: {}, data: {email: data.login, password: data.password}})
+    axios({method: 'post',url:'http://127.0.0.1:8000/api/login/', headers: {}, data: {email: data.login.replace(/\s/g, ''), password: data.password.replace(/\s/g, '')}})
     .then(res => {
       history.push('/');
       window.location.reload();

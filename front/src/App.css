@@ -3,6 +3,10 @@
   padding:0;
 }
 
+body {
+  background-color:rgb(255, 255, 255);
+}
+
 .navigation {
   padding-top:15px;
   text-align:left;
@@ -16,7 +20,7 @@
   color:rgb(255, 255, 255);
   margin-left:35px;
   font-size:20px;
-  text-decoration: none;
+  text-decoration:none;
   float:left;
 }
 
@@ -45,9 +49,15 @@ li {
 }
 
 
-.post, .loading {
+.loading {
   margin-top:50px;
   text-align:center;
+}
+
+.post {
+  margin-top:50px;
+  text-align:center;
+  color:#000000;
 }
 
 .Chat-title {
@@ -145,13 +155,6 @@ button {
   border: 1px solid #333;
   margin-bottom: 10px;
   border-radius: 4px;
-}
-
-.loader {
-  display: grid;
-  align-items: center;
-  justify-content: center;
-  margin-top:50px;
 }
 
 .registration-label {
