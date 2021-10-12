@@ -14,7 +14,7 @@ schema_view = get_schema_view(
         title="Useroot API",
         default_version='v1',
         description="Useroot API offical",
-        contact=openapi.Contact(email="nixwares@gmail.com"),
+        contact=openapi.Contact(email=""),
     ),
     public=True,
     permission_classes=[permissions.AllowAny],

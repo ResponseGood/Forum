@@ -3,6 +3,7 @@ import axios from 'axios';
 import News from '../News/News';
 import LoginForm from '..//LoginForm/LoginForm';
 import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
+import RegistrationForm from '../RegistrationForm/RegistrationForm'
 
 export default function Header (props) {
     const [user, setUser] = useState({})
@@ -48,21 +49,34 @@ export default function Header (props) {
                     </nav>
                 </div>
                 <Switch>
-                    <Route path="/rules" component={Rules}/>
-                    <Route path="/login" component={LoginForm}/>
-                    <Route path="/search" component={Search}/>
-                    <Route path="/chat" component={Chat}/>
-                    <Route path="/" component={News}/>
-                    <Route path="/me" component={Profile}/>
+                    <Route exact path="/" component={News}/>
+                    <Route exact path="/rules" component={Rules}/>
+                    <Route exact path="/login" component={LoginForm}/>
+                    <Route exact path="/reg" component={RegistrationForm}/>
+                    <Route exact path="/search" component={Search}/>
+                    <Route exact path="/chat" component={Chat}/>
+                    <Route exact path="/active" component={EmailActive}/>
+                    <Route component={NotFound}/>
                 </Switch>
             </Router>
         </>
     );
 }
 
-function Profile () {
-    return <h1>Profile</h1>
+
+
+function EmailActive () {
+    <div className="email">
+        <h2>Active your email!</h2>
+    </div>
 }
+
+
+function NotFound () {
+    return <h2>Path is not exist!</h2>
+
+}
+
 function Rules() {
     return <h2>Rules</h2>
 }

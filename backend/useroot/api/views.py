@@ -1,3 +1,4 @@
+import requests
 import jwt, json
 from ..core import models
 from django.utils.timezone import pytz
@@ -46,6 +47,12 @@ class RegisterView(APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+        data = {}
+        data['body'] = {"email":request.data["email"]}
+        headers = {'Content-Type': "application/json", 'Accept': "application/json"}
+        url = f'http://127.0.0.1:8000/users/resend_activation/'
+        r = requests.post(url, json=data, headers=headers)
+        print(r)
         serializer.save()
         return Response(serializer.data)
     def create(self, validated_data):

@@ -1,7 +1,8 @@
-import { useHistory } from "react-router-dom";
+import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import React from 'react';
+import { useHistory } from "react-router-dom";
 
 export default function LoginForm () {
   const {register, formState: { errors }, handleSubmit } = useForm({
@@ -17,7 +18,10 @@ export default function LoginForm () {
     .catch(err => {
       console.log(err);
     })
- }
+  }
+  const onClickRegistr = () => {
+    history.push('/reg');
+  }
 
   return (
     <div className="form_wrapper">
@@ -40,7 +44,7 @@ export default function LoginForm () {
         })}
         type="password"/>
         {errors.password && <p>{errors.password.message}</p>}
-        <label className="registration-label">У меня нет аккаунта</label>
+        <label className="registration-label" onClick={onClickRegistr}>У меня нет аккаунта</label>
         <input type="submit" value="ок" />
       </form>
     </div>

@@ -14,10 +14,9 @@ export default function RegistrationForm () {
     });
     const history = useHistory();
     const onSubmit = (data) => {
-        axios({method: 'post',url:'http://127.0.0.1:8000/api/register/', headers: {}, data: {email: data.login, password: data.password, username:data.username}})
+        axios({method: 'post',url:'http://127.0.0.1:8000/api/register/', headers: {}, data: {email: data.email, password: data.password, username:data.username}})
         .then(res => {
-          history.push('/login');
-          window.location.reload();
+          history.push('/active');
         })
         .catch(err => {
           console.log(err);
@@ -34,6 +33,10 @@ export default function RegistrationForm () {
                     maxLength: {
                         value: 15,
                         message: "Максимум 15 символов"
+                    },
+                    minLength: {
+                        value: 3,
+                        message: "Минимум 3 символа"
                     }
                 })}
                 />
@@ -41,13 +44,17 @@ export default function RegistrationForm () {
                 <input
                 placeholder="Email"
                 {...register("email", {
-                    required: "Это обязательное поле"
+                    required: "Это обязательное поле",
+                    pattern: {
+                        value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                        message: 'Невалидный email',
+                    },
                 })}
                 />
                 {errors.email && <p>{errors.email.message}</p>}
                 <input
                 placeholder="Пароль"
-                type="text"
+                type="password"
                 {...register("password", {
                     required: "Это обязательное поле",
                     minLength: {
