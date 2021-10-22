@@ -5,4 +5,5 @@
   <li>python manage.py makemigrations</li>
   <li>python manage.py migrate</li>
 </ol>
-<a href="https://github.com/ResponseGood/Forum/">Back</a><a href="https://github.com/ResponseGood/Forum/tree/main/API">API</a> 
+<a href="https://github.com/ResponseGood/Forum/">Back</a>
+<a href="https://github.com/ResponseGood/Forum/tree/main/API">API</a> 
