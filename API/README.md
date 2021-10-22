@@ -6,4 +6,4 @@
 <p><b>api/me/</b> - get auth jwt</p>
 <p><b>api/logout/</b> - logout acc</p>
 <p><b>api/user/<int:pk></b> - get user by id</p>
-<a href="https://github.com/ResponseGood/Forum"></a>
+<a href="https://github.com/ResponseGood/Forum">Back</a>
