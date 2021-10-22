@@ -5,3 +5,4 @@
 <p><b>api/login/</b> - login with pass:login</p>
 <p><b>api/me/</b> - get auth jwt</p>
 <p><b>api/logout/</b> - logout acc</p>
+<p><b>api/user/<int:pk></b> - get user by id</p>
