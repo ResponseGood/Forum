@@ -11,3 +11,4 @@ django-cors-headers
 PyJWT==1.7.1
 djoser
 psycopg2
+django-smtp-ssl
