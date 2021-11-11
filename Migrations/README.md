@@ -1,5 +1,6 @@
 <h2>How to fix problems in django migrate</h2>
 <ol>
+  <li>delete old migrations</li>
   <li>python manage.py makemigrations core</li>
   <li>python manage.py migrate</li>
   <li>python manage.py makemigrations</li>
