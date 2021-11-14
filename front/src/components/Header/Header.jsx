@@ -23,7 +23,7 @@ export default function Header (props) {
     const isAuthAvatar = () => {
         if (isLoggedIn) {
             if (!user.avatar) {
-                return <img key={user.id} className='avatar' src='http://127.0.0.1:8000/media/C%3A/Users/cewim/Desktop/GitHub/Forum/backend/useroot/media/default.png'/>
+                return <img key={user.id} className='avatar' src='http://127.0.0.1:8000/media/default.png'/>
             } else {
                 return <img key={user.id} className='avatar' src={user.avatar}/>
             }
