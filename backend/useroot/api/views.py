@@ -45,18 +45,10 @@ class PostView(APIView):
 
 class RegisterView(APIView):
     def post(self, request):
-        try:
-            serializer = UserSerializer(data=request.data)
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
-            return Response(serializer.data)
-        finally:
-            data = {}
-            data['body'] = {"email":request.data["email"]}
-            headers = {'Content-Type': "application/json", 'Accept': "application/json"}
-            url = f'http://127.0.0.1:8000/users/resend_activation/'
-            requests.post(url, json=data, headers=headers)
-
+        serializer = UserSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
     def create(self, validated_data):
         password = validated_data.pop('password', None)
         instance = self.Meta.model(**validated_data)

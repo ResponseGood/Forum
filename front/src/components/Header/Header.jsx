@@ -66,14 +66,18 @@ export default function Header (props) {
 
 
 function EmailActive () {
-    <div className="email">
-        <h2>Active your email!</h2>
-    </div>
+        <h2 className="email">Active your email!</h2>
 }
 
 
 function NotFound () {
-    return <h2>Path is not exist!</h2>
+    return (
+        <div className="center_wrapper">
+            <h2 className="title-error">Ошибка 404</h2>
+            <br/>
+            <p className="notfound">Страница не найдена!</p>
+        </div>
+    )
 
 }
 
