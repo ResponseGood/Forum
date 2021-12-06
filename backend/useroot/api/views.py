@@ -1,6 +1,8 @@
+import jwt
+import random
 import requests
-import jwt, json
 from ..core import models
+from django.http import HttpResponse
 from django.utils.timezone import pytz
 from django.core.mail import send_mail
 from rest_framework import permissions
@@ -9,8 +11,7 @@ from rest_framework.views import APIView
 from useroot.core.models import Post, User
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from ..settings import SECRET_KEY, TIME_ZONE
-from rest_framework_simplejwt.tokens import RefreshToken
+from ..settings import SECRET_KEY, TIME_ZONE, TG_TOKEN
 from rest_framework.exceptions import AuthenticationFailed
 from django.core.serializers.json import DjangoJSONEncoder
 from .serializers import PostsSerializer, UserPublicDataSerializer, UserSerializer
@@ -71,20 +72,23 @@ class LoginView(APIView):
         payload = {'id': user.id, 'exp': datetime.utcnow() + timedelta(minutes=20), 'ait': datetime.utcnow()}
         token = jwt.encode(payload=payload, key=SECRET_KEY, algorithm='HS256', json_encoder=DjangoJSONEncoder).decode('utf-8')
         if user.two_factor_auth:
-            login_time = pytz.timezone(TIME_ZONE)
-            login_time = login_time.localize(datetime.now())
-            send_mail(
-                subject='Выполнен вход на ваш аккаунт.',
-                message=f'Время {login_time}, IP: {ip}.\nПри необходимости смените пароль.',
-                from_email=None,
-                recipient_list=[email],
-            )
-        response = Response()
-        response.set_cookie(key='JWT', value=token, httponly=True)
-        response.data = {
-            'JWT': token
-        }
-        return response
+            message_method = f'https://api.telegram.org/bot{TG_TOKEN}/getUpdates?offset=-1'
+            message_data = requests.post(message_method).json()['result']
+            for elem in message_data:
+                if elem['message']['from']['username'] == user.telegram_username:
+                    user_id = elem['message']['chat']['id']
+            random_code = random.randint(1000, 8000)
+            requests.post(f'https://api.telegram.org/bot{TG_TOKEN}/sendMessage?chat_id={user_id}&text=Кто-то попытался зайти на ваш аккаунт!Код потверждения - {random_code}')
+            response = HttpResponse('User have 2fa auth')
+            response.status_code = 400
+            return response
+        else:
+            response = Response()
+            response.set_cookie(key='JWT', value=token, httponly=True)
+            response.data = {
+                'JWT': token
+            }
+            return response
 
 class UserView(APIView): 
 

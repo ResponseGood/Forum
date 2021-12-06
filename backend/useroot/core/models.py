@@ -10,9 +10,11 @@ class User(AbstractUser):
     email = models.EmailField(verbose_name='email', blank=True, unique=True)
     status = models.CharField(verbose_name='Статус пользователя', max_length=30, default='')
     two_factor_auth = models.BooleanField(verbose_name='Двух-факторка', default=False)
+    telegram_username = models.CharField(verbose_name='Телеграмм', max_length=200, default='', unique=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['avatar', 'username', 'first_name', 'last_name']
     read_only_fields = ('date_joined')
+
     def __str__(self):
         return '{}'.format(self.username)
 

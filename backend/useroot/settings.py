@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'crispy_forms',
     'useroot.core',
+    'useroot.api',
     'drf_yasg',
     'djoser',
 ]
@@ -117,8 +118,10 @@ EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 465
 
 
+#TELEGRAM BOT
+TG_TOKEN = ''
+ 
 HIDE_USERS = True
-
 
 
 CORS_ORIGIN_ALLOW_ALL = True
