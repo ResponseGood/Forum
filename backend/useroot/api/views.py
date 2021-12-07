@@ -136,7 +136,29 @@ class UserPublicView(APIView):
         return Response(serializer.data)
         
 class LogoutView(APIView):
+    def get(self, request):
+        token = request.COOKIES.get('JWT')
+        if not token:
+            raise AuthenticationFailed('Not Authorized!')
+        try:
+            payload = jwt.decode(jwt=token, key=SECRET_KEY, algorithms=['HS256'])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed('Not Authorized!')
+        response = Response()
+        response.delete_cookie('JWT')
+        response.data = {
+            "message": "you've logged out"
+        }
+        return response
+
     def post(self, request):
+        token = request.COOKIES.get('JWT')
+        if not token:
+            raise AuthenticationFailed('Not Authorized!')
+        try:
+            payload = jwt.decode(jwt=token, key=SECRET_KEY, algorithms=['HS256'])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed('Not Authorized!')
         response = Response()
         response.delete_cookie('JWT')
         response.data = {
