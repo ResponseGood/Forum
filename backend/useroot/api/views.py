@@ -2,16 +2,15 @@ import jwt
 import random
 import requests
 from ..core import models
+from .models import Code_2auth
 from django.http import HttpResponse
-from django.utils.timezone import pytz
-from django.core.mail import send_mail
 from rest_framework import permissions
 from datetime import datetime, timedelta
 from rest_framework.views import APIView
 from useroot.core.models import Post, User
+from ..settings import SECRET_KEY, TG_TOKEN
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from ..settings import SECRET_KEY, TIME_ZONE, TG_TOKEN
 from rest_framework.exceptions import AuthenticationFailed
 from django.core.serializers.json import DjangoJSONEncoder
 from .serializers import PostsSerializer, UserPublicDataSerializer, UserSerializer
@@ -79,8 +78,17 @@ class LoginView(APIView):
                     user_id = elem['message']['chat']['id']
             random_code = random.randint(1000, 8000)
             requests.post(f'https://api.telegram.org/bot{TG_TOKEN}/sendMessage?chat_id={user_id}&text=Кто-то попытался зайти на ваш аккаунт!Код потверждения - {random_code}')
-            response = HttpResponse('User have 2fa auth')
-            response.status_code = 400
+            try:
+                code = Code_2auth.objects.get(username_telegram=user.telegram_username)
+                code.delete()
+            except Exception as e:
+                print(e)
+            finally:
+                code = Code_2auth.objects.create(username_telegram=user.telegram_username,code=random_code)
+                code.save()
+            valide_token = Code_2auth.objects.get(username_telegram=user.telegram_username).valide_token
+            response = HttpResponse(f'User have 2fa auth\nValidate token - {valide_token}')
+            response.status_code = 201
             return response
         else:
             response = Response()
