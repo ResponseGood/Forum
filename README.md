@@ -13,7 +13,7 @@
   <li><p>Django Rest Framework</p></li>
   <li><p>Djoser</p></li>
   <li><p>Simple JWT</p></li>
-  <li><p>Webhook-discord</p></li>
+  <li><p>Webhook discord</p></li>
 </ol>
 <h2>Start project local</h2>
 <a href='https://github.com/ResponseGood/Forum/blob/main/Migrations/README.md'>Migrations Django</a>
